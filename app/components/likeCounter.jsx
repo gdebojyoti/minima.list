@@ -1,4 +1,5 @@
 import React from 'react';
+import './likeCounter.scss';
 
 class LikeCounter extends React.Component {
     constructor () {
@@ -11,10 +12,7 @@ class LikeCounter extends React.Component {
 
     render () {
         return (
-            <div>
-                <button onClick={ this.onLike }>Like</button>
-                <div>Likes: { this.state.likesCount }</div>
-            </div>
+            <button onClick={ this.onLike }>Likes: { this.state.likesCount }</button>
         )
     }
 
