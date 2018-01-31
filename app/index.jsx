@@ -1,11 +1,11 @@
 import React from 'react';
 import {render} from 'react-dom';
-import LikeCounter from './components/likeCounter.jsx';
+import TodoApp from './components/TodoApp';
 
 class App extends React.Component {
     render () {
         return (
-            <LikeCounter/>
+            <TodoApp/>
         )
     }
 }

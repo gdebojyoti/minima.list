@@ -22,6 +22,9 @@ var config = {
                 use:['style-loader','css-loader', 'sass-loader']
             }
         ]
+    },
+    resolve: {
+        extensions: [".js", ".json", ".jsx"]
     }
 };
 
