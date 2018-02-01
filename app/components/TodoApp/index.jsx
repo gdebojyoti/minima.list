@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.scss';
 import TodoList from "./../TodoList";
+import TodoInput from "./../TodoInput";
 
 class TodoApp extends React.Component {
     constructor () {
@@ -23,12 +24,25 @@ class TodoApp extends React.Component {
             ]
         };
         this.onLike = this.onLike.bind(this);
+        this.addTodoItem = this.addTodoItem.bind(this);
+    }
+
+    addTodoItem (todo) {
+        let currentTodos = [...this.state.todos];
+        let lastId = currentTodos[currentTodos.length - 1].id;
+        currentTodos.push({
+            id: lastId + 1,
+            todo
+        });
+
+        this.setState({todos: currentTodos});
     }
 
     render () {
         return (
             <div>
                 <button onClick={ this.onLike }>Likes: { this.state.likesCount }</button>
+                <TodoInput addTodoItem={this.addTodoItem} />
                 <TodoList todos={ this.state.todos } />
             </div>
         )
