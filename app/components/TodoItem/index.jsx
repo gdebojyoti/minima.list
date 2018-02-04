@@ -1,7 +1,10 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
-const Todo = props => (
-    <li>{props.text}</li>
-)
+const TodoItem = (props, {store}) => {
+    return (
+        <li>{props.text}</li>
+    )
+}
 
-export default Todo;
+export default TodoItem;

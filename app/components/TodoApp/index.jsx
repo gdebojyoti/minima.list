@@ -1,58 +1,52 @@
-import React from 'react';
-import './index.scss';
+import React from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
+import "./index.scss";
 import TodoList from "./../TodoList";
 import TodoInput from "./../TodoInput";
+import * as todoActions from "./../../actions/todoActions";
 
 class TodoApp extends React.Component {
     constructor () {
         super();
-        this.state = {
-            likesCount: 0,
-            todos: [
-                {
-                    id: 11,
-                    todo: "Learn React JS"
-                },
-                {
-                    id: 12,
-                    todo: "Learn Webpack"
-                },
-                {
-                    id: 13,
-                    todo: "Learn Babel"
-                },
-            ]
-        };
-        this.onLike = this.onLike.bind(this);
         this.addTodoItem = this.addTodoItem.bind(this);
     }
 
     addTodoItem (todo) {
-        let currentTodos = [...this.state.todos];
-        let lastId = currentTodos[currentTodos.length - 1].id;
-        currentTodos.push({
-            id: lastId + 1,
-            todo
-        });
+        const { store } = this.context;
+        const currentTodos = store.getState().todoReducer;
+        let lastId = currentTodos.length > 0 ? currentTodos[currentTodos.length - 1].id : 0;
 
-        this.setState({todos: currentTodos});
+        this.props.todoActions.addTodo(lastId + 1, todo);
     }
 
     render () {
+        const { store } = this.context;
         return (
             <div>
-                <button onClick={ this.onLike }>Likes: { this.state.likesCount }</button>
                 <TodoInput addTodoItem={this.addTodoItem} />
-                <TodoList todos={ this.state.todos } />
+                <TodoList />
             </div>
         )
     }
+}
 
-    onLike () {
-        this.setState({
-            likesCount: this.state.likesCount + 1
-        });
+TodoApp.contextTypes = {
+    store: PropTypes.object
+};
+
+function mapStateToProps(state) {
+    return {
+        todos: state.todos
     }
 }
 
-export default TodoApp;
+function mapDispatchToProps(dispatch) {
+    return {
+        todoActions: bindActionCreators(todoActions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoApp);

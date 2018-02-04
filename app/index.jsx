@@ -1,13 +1,12 @@
-import React from 'react';
-import {render} from 'react-dom';
-import TodoApp from './components/TodoApp';
+import React from "react";
+import {render} from "react-dom";
+import { Provider } from "react-redux";
 
-class App extends React.Component {
-    render () {
-        return (
-            <TodoApp/>
-        )
-    }
-}
+import TodoApp from "./components/TodoApp";
+import store from "./store";
 
-render(<App/>, document.getElementById("app"));
+const App = () => (
+    <TodoApp/>
+);
+
+render(<Provider store={store}><App/></Provider>, document.getElementById("app"));
