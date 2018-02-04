@@ -1,11 +1,5 @@
 import React from "react";
 
-const TodoInput_ = props => (
-    <div>
-        <input type="text" placeholder="Add a new task" onChange={console.log("sds")} />
-    </div>
-)
-
 class TodoInput extends React.Component {
     constructor (props) {
         super(props);
@@ -31,7 +25,7 @@ class TodoInput extends React.Component {
     render () {
         return (
             <div>
-                <input type="text" placeholder="Add a task" value={this.state.text} onChange={this.handleChange} onKeyPress={this.handleKeyPress} />
+                <input type="text" placeholder="Add a task" autoFocus value={this.state.text} onChange={this.handleChange} onKeyPress={this.handleKeyPress} />
             </div>
         )
     }

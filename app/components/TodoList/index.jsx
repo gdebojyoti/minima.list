@@ -3,8 +3,9 @@ import TodoItem from "./../TodoItem";
 import PropTypes from "prop-types";
 
 class TodoList extends React.Component {
-    constructor () {
-        super();
+    constructor (props) {
+        super(props);
+        this.generateTodoItems = this.generateTodoItems.bind(this);
     }
 
     componentDidMount () {
@@ -12,22 +13,30 @@ class TodoList extends React.Component {
         this.unsubscribe = this.store.subscribe(() => this.forceUpdate());
     }
 
-    render() {
+    componentWillUnmount () {
+        this.unsubscribe();
+    }
+
+    generateTodoItems () {
         if (this.store) {
+            let todos = this.store.getState().todos.filter(todo => todo.status === this.props.filterBy);
+            if (todos.length > 0) {
                 return (
-                    <ul>
-                        {this.store.getState().todoReducer.map(
-                            todo => <TodoItem text={todo.text} key={todo.id} />
-                        )}
-                    </ul>
+                    todos.map(
+                        todo => <TodoItem text={todo.text} key={todo.id} />
+                    )
                 )
-        } else {
-            return (
-                <ul>
-                    <span>No task to display</span>
-                </ul>
-            )
+            }
         }
+        return <span>No tasks</span>
+    }
+
+    render() {
+        return (
+            <ul>
+                {this.generateTodoItems()}
+            </ul>
+        )
     }
 }
 
