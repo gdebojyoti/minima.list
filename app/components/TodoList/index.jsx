@@ -13,7 +13,7 @@ class TodoList extends React.Component {
         if (todos.length > 0) {
             return (
                 todos.map(
-                    todo => <TodoItem text={todo.text} key={todo.id} />
+                    todo => <TodoItem text={todo.text} key={todo.id} toggleTodo={() => this.props.toggleTodo(todo.id)} archiveTodo={this.props.archiveTodo} />
                 )
             )
         }

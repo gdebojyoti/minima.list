@@ -7,23 +7,28 @@ import ENM from "./../../enums";
 import TodoList from "./../TodoList";
 import TodoInput from "./../TodoInput";
 import TodoFilter from "./../TodoFilter";
-import { addTodo } from "./../../actions/todoActions";
+import { addTodo, toggleTodo } from "./../../actions/todoActions";
 
 class TodoApp extends React.Component {
     constructor (props) {
         super(props);
-        this.addTodoItem = this.addTodoItem.bind(this);
+        this.addTodo = this.addTodo.bind(this);
+        this.toggleTodo = this.toggleTodo.bind(this);
         this.getCurrentFilter = this.getCurrentFilter.bind(this);
     }
 
-    addTodoItem (todo) {
+    addTodo (todo) {
         const todos = this.props.todos;
 
         // TODO: Generate unique ID for each todo (eg: last 7 characters of md5 hash of current timestamp)
         // get ID of the last todo item
         const lastId = todos.length > 0 ? todos[todos.length - 1].id : 0;
 
-        this.props.addTodoItem(lastId + 1, todo);
+        this.props.addTodo(lastId + 1, todo);
+    }
+
+    toggleTodo (id) {
+        this.props.toggleTodo(id);
     }
 
     getCurrentFilter () {
@@ -37,8 +42,8 @@ class TodoApp extends React.Component {
     render () {
         return (
             <div>
-                <TodoInput addTodoItem={this.addTodoItem} />
-                <TodoList filterBy={this.getCurrentFilter()} />
+                <TodoInput addTodo={this.addTodo} />
+                <TodoList filterBy={this.getCurrentFilter()} toggleTodo={this.toggleTodo} />
                 <TodoFilter />
             </div>
         )
@@ -54,7 +59,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addTodoItem: (id, todo) => dispatch(addTodo(id, todo))
+        addTodo: (id, todo) => dispatch(addTodo(id, todo)),
+        toggleTodo: (id) => dispatch(toggleTodo(id))
     }
 }
 

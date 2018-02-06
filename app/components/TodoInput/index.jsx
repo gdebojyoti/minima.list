@@ -17,7 +17,7 @@ class TodoInput extends React.Component {
 
     handleKeyPress (e) {
         if (e.key === "Enter") {
-            this.props.addTodoItem(this.state.text);
+            this.props.addTodo(this.state.text);
             this.setState({text: ""});
         }
     }

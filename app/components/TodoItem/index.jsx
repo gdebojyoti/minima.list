@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 
 const TodoItem = (props, {store}) => {
     return (
-        <li>{props.text}</li>
+        <li>
+            {props.text}
+            <span onClick={props.toggleTodo}>&#10004;</span>
+            <span onClick={props.archiveTodo}>&#10008;</span>
+        </li>
     )
 }
 
