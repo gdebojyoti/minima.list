@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import ENM from "./../../enums";
 import { filterTodo } from "./../../actions/todoActions";
 
 class TodoFilter extends React.Component {
@@ -18,8 +19,8 @@ class TodoFilter extends React.Component {
         const { store } = this.context;
         return (
             <div>
-                <button onClick={() => this.setFilter("PENDING")}>Pending</button>
-                <button onClick={() => this.setFilter("COMPLETED")}>Completed</button>
+                <button onClick={() => this.setFilter(ENM.STATUS.PENDING)}>Pending</button>
+                <button onClick={() => this.setFilter(ENM.STATUS.COMPLETED)}>Completed</button>
             </div>
         )
     }

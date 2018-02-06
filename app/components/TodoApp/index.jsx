@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import "./index.scss";
+
+import ENM from "./../../enums";
 import TodoList from "./../TodoList";
 import TodoInput from "./../TodoInput";
 import TodoFilter from "./../TodoFilter";
@@ -16,7 +18,10 @@ class TodoApp extends React.Component {
 
     componentDidMount () {
         this.store = this.context.store;
-        this.unsubscribe = this.store.subscribe(() => {console.log("sdh");this.forceUpdate()});
+        this.unsubscribe = this.store.subscribe(() => {
+            console.log("force update triggered");
+            this.forceUpdate();
+        });
     }
 
     addTodoItem (todo) {
@@ -34,7 +39,7 @@ class TodoApp extends React.Component {
                 return this.store.getState().filter.activeFilter;
             }
         }
-        return "PENDING";
+        return ENM.STATUS.PENDING;
     }
 
     // TODO: Don't send "filterBy" props
