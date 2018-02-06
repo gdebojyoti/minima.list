@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import {connect} from "react-redux";
 
 import "./index.scss";
 
@@ -10,34 +10,25 @@ import TodoFilter from "./../TodoFilter";
 import { addTodo } from "./../../actions/todoActions";
 
 class TodoApp extends React.Component {
-    constructor () {
-        super();
+    constructor (props) {
+        super(props);
         this.addTodoItem = this.addTodoItem.bind(this);
         this.getCurrentFilter = this.getCurrentFilter.bind(this);
     }
 
-    componentDidMount () {
-        this.store = this.context.store;
-        this.unsubscribe = this.store.subscribe(() => {
-            console.log("force update triggered");
-            this.forceUpdate();
-        });
-    }
-
     addTodoItem (todo) {
-        const { store } = this.context;
-        const todos = store.getState().todos;
+        const todos = this.props.todos;
+
+        // TODO: Generate unique ID for each todo (eg: last 7 characters of md5 hash of current timestamp)
         // get ID of the last todo item
         const lastId = todos.length > 0 ? todos[todos.length - 1].id : 0;
 
-        store.dispatch(addTodo(lastId + 1, todo));
+        this.props.addTodoItem(lastId + 1, todo);
     }
 
     getCurrentFilter () {
-        if (this.store) {
-            if (this.store.getState().filter.activeFilter) {
-                return this.store.getState().filter.activeFilter;
-            }
+        if (this.props.filter.activeFilter) {
+            return this.props.filter.activeFilter;
         }
         return ENM.STATUS.PENDING;
     }
@@ -54,8 +45,17 @@ class TodoApp extends React.Component {
     }
 }
 
-TodoApp.contextTypes = {
-    store: PropTypes.object
+const mapStateToProps = state => {
+    return {
+        todos: state.todos,
+        filter: state.filter
+    }
 };
 
-export default TodoApp;
+const mapDispatchToProps = dispatch => {
+    return {
+        addTodoItem: (id, todo) => dispatch(addTodo(id, todo))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoApp);

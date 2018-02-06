@@ -1,6 +1,6 @@
 import React from "react";
 import TodoItem from "./../TodoItem";
-import PropTypes from "prop-types";
+import {connect} from "react-redux";
 
 class TodoList extends React.Component {
     constructor (props) {
@@ -8,25 +8,14 @@ class TodoList extends React.Component {
         this.generateTodoItems = this.generateTodoItems.bind(this);
     }
 
-    componentDidMount () {
-        this.store = this.context.store;
-        this.unsubscribe = this.store.subscribe(() => this.forceUpdate());
-    }
-
-    componentWillUnmount () {
-        this.unsubscribe();
-    }
-
     generateTodoItems () {
-        if (this.store) {
-            let todos = this.store.getState().todos.filter(todo => todo.status === this.props.filterBy);
-            if (todos.length > 0) {
-                return (
-                    todos.map(
-                        todo => <TodoItem text={todo.text} key={todo.id} />
-                    )
+        let todos = this.props.todos.filter(todo => todo.status === this.props.filterBy);
+        if (todos.length > 0) {
+            return (
+                todos.map(
+                    todo => <TodoItem text={todo.text} key={todo.id} />
                 )
-            }
+            )
         }
         return <span>No tasks</span>
     }
@@ -40,8 +29,10 @@ class TodoList extends React.Component {
     }
 }
 
-TodoList.contextTypes = {
-    store: PropTypes.object
-};
+const mapStateToProps = state => {
+    return {
+        todos: state.todos
+    }
+}
 
-export default TodoList;
+export default connect(mapStateToProps)(TodoList);
