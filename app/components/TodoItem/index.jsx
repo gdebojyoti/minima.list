@@ -1,7 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-const TodoItem = (props, {store}) => {
+const TodoItem = props => {
     return (
         <li>
             {props.text}
