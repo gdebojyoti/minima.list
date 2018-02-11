@@ -2,6 +2,28 @@
     <head>
         <meta charset="utf-8">
         <title>MINIMA.LIST | An experiment with React, Webpack, Babel, NPM & Sass</title>
+        <link rel="manifest" href="manifest.json">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#e67e22">
+
+        <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("sw.js").then(
+                    reg => console.log("Registered with scope: ", reg.scope),
+                    err => console.log("Registration failed: ", err)
+                );
+            });
+
+            window.addEventListener("beforeinstallprompt", e => {
+                alert("Prompt");
+                e.preventDefault();
+                return false;
+            });
+        } else {
+            console.log("SW not available.");
+        }
+        </script>
     </head>
 
     <body>
