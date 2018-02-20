@@ -2,6 +2,8 @@ import React from "react";
 import TodoItem from "./../TodoItem";
 import {connect} from "react-redux";
 
+import "./index.scss";
+
 class TodoList extends React.Component {
     constructor (props) {
         super(props);
@@ -9,7 +11,7 @@ class TodoList extends React.Component {
     }
 
     generateTodoItems () {
-        let todos = this.props.todos.filter(todo => todo.status === this.props.filterBy);
+        let todos = this.props.todos.filter(todo => todo.status === this.props.filterBy && todo.label === this.props.label);
         if (todos.length > 0) {
             return (
                 todos.map(
@@ -22,9 +24,12 @@ class TodoList extends React.Component {
 
     render() {
         return (
-            <ul>
-                {this.generateTodoItems()}
-            </ul>
+            <div className="todo-list">
+                <h3>{this.props.label}</h3>
+                <ul>
+                    {this.generateTodoItems()}
+                </ul>
+            </div>
         )
     }
 }

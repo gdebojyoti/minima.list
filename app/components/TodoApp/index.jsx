@@ -1,20 +1,20 @@
 import React from "react";
 import {connect} from "react-redux";
 
+import "./../../styles/global.scss";
 import "./index.scss";
 
 import ENM from "./../../enums";
-import TodoList from "./../TodoList";
+import Hello from "./../Hello";
+import TodoLists from "./../TodoLists";
 import TodoInput from "./../TodoInput";
 import TodoFilter from "./../TodoFilter";
-import { addTodo, toggleTodo } from "./../../actions/todoActions";
+import { addTodo } from "./../../actions/todoActions";
 
 class TodoApp extends React.Component {
     constructor (props) {
         super(props);
         this.addTodo = this.addTodo.bind(this);
-        this.toggleTodo = this.toggleTodo.bind(this);
-        this.getCurrentFilter = this.getCurrentFilter.bind(this);
     }
 
     addTodo (todo) {
@@ -27,24 +27,13 @@ class TodoApp extends React.Component {
         this.props.addTodo(lastId + 1, todo);
     }
 
-    toggleTodo (id) {
-        this.props.toggleTodo(id);
-    }
-
-    getCurrentFilter () {
-        if (this.props.filter.activeFilter) {
-            return this.props.filter.activeFilter;
-        }
-        return ENM.STATUS.PENDING;
-    }
-
-    // TODO: Don't send "filterBy" props
     render () {
         return (
-            <div>
-                <TodoInput addTodo={this.addTodo} />
-                <TodoList filterBy={this.getCurrentFilter()} toggleTodo={this.toggleTodo} />
+            <div className="todo-app">
+                <Hello />
+                <TodoLists />
                 <TodoFilter />
+                <TodoInput addTodo={this.addTodo} />
             </div>
         )
     }
@@ -53,14 +42,12 @@ class TodoApp extends React.Component {
 const mapStateToProps = state => {
     return {
         todos: state.todos,
-        filter: state.filter
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         addTodo: (id, todo) => dispatch(addTodo(id, todo)),
-        toggleTodo: (id) => dispatch(toggleTodo(id))
     }
 }
 

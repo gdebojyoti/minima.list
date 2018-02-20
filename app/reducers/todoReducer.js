@@ -10,7 +10,8 @@ export default (state = initialState, action) => {
                 {
                     id: action.data.id,
                     text: action.data.text,
-                    status: ENM.STATUS.PENDING
+                    status: ENM.STATUS.PENDING,
+                    label: ENM.LABEL.WORK
                 }
             ];
         case "TOGGLE_TODO":

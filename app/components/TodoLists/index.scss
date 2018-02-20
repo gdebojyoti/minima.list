@@ -1,0 +1,18 @@
+.todo-list-container {
+    margin: 20px 0;
+    overflow: auto;
+}
+.todo-list-container::-webkit-scrollbar {
+    display: none;
+}
+
+.todo-list-slider {
+    float: left;
+}
+
+.todo-list-slider>div {
+    margin-left: 20px;
+}
+.todo-list-slider>div:last-of-type {
+    margin-right: 20px;
+}

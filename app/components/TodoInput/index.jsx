@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./index.scss";
+
 class TodoInput extends React.Component {
     constructor (props) {
         super(props);
@@ -25,7 +27,7 @@ class TodoInput extends React.Component {
     render () {
         return (
             <div>
-                <input type="text" placeholder="Add a task" autoFocus value={this.state.text} onChange={this.handleChange} onKeyPress={this.handleKeyPress} />
+                <input className="todo-input" type="text" placeholder="What task are you planning to perform?" autoFocus value={this.state.text} onChange={this.handleChange} onKeyPress={this.handleKeyPress} />
             </div>
         )
     }

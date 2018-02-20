@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
-import todoReducer from "./todoReducer.js";
-import filterReducer from "./filterReducer.js";
+import todos from "./todoReducer.js";
+import filter from "./filterReducer.js";
+import settings from "./settingReducer.js";
 
 export default combineReducers({
-    todos: todoReducer,
-    filter: filterReducer
+    todos,
+    filter,
+    settings
 });

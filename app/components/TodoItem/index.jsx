@@ -1,11 +1,16 @@
 import React from "react";
 
 const TodoItem = props => {
+    let styles = {
+        listStyle: "none"
+    }
     return (
-        <li>
+        <li style={styles}>
+            <input onClick={props.toggleTodo} type="checkbox" />
+            &nbsp;
             {props.text}
-            <span onClick={props.toggleTodo}>&#10004;</span>
-            <span onClick={props.archiveTodo}>&#10008;</span>
+            {/*<span>&#10004;</span>
+            <span onClick={props.archiveTodo}>&#10008;</span>*/}
         </li>
     )
 }
