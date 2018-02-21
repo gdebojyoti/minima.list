@@ -29,9 +29,11 @@ class TodoLists extends React.Component {
     render() {
         return (
             <div className="todo-list-container">
-                <div className="todo-list-slider" style={{width: "610px"}}>
+                <div className="todo-list-slider" style={{width: "1195px"}}>
                     <TodoList filterBy={this.getCurrentFilter()} toggleTodo={this.toggleTodo} label={ENM.LABEL.WORK} />
                     <TodoList filterBy={this.getCurrentFilter()} toggleTodo={this.toggleTodo} label={ENM.LABEL.PERSONAL} />
+                    <TodoList filterBy={this.getCurrentFilter()} toggleTodo={this.toggleTodo} label={ENM.LABEL.GROCERIES} />
+                    <TodoList filterBy={this.getCurrentFilter()} toggleTodo={this.toggleTodo} label={ENM.LABEL.MISC} />
                 </div>
             </div>
         )

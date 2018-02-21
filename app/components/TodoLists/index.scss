@@ -11,8 +11,11 @@
 }
 
 .todo-list-slider>div {
-    margin-left: 20px;
+    margin-right: 15px;
+}
+.todo-list-slider>div:first-of-type {
+    margin-left: 25px;
 }
 .todo-list-slider>div:last-of-type {
-    margin-right: 20px;
+    margin-right: 25px;
 }

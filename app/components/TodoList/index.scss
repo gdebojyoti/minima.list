@@ -1,10 +1,11 @@
 .todo-list {
+    position: relative;
     float: left;
 
     width: 275px;
-    max-height: 400px;
+    height: 350px;
     margin: 10px 0;
-    padding: 10px;
+    padding: 20px;
     border-radius: 5px;
 
     color: #333;
@@ -13,7 +14,48 @@
     box-shadow: 0 0 2px 0 rgba(0,0,0,.75);
 
     h3 {
-        font-size: 20px;
+        font-size: 30px;
         font-weight: 700;
+    }
+
+    &-progress {
+        position: absolute;
+        left: 20px;
+        bottom: 20px;
+
+        width: calc(100% - 40px);
+
+        .progress-bar {
+            float: left;
+
+            width: calc(100% - 40px);
+            height: 3px;
+            margin-top: 5px;
+            border-radius: 2px;
+
+            background-color: #f00;
+            background-image: linear-gradient(to left, #DA4453, #89216B);
+
+            &-remaining {
+                float: right;
+
+                height: 100%;
+
+                background-color: #eee;
+
+                transition: width .2s;
+            }
+        }
+
+        .progress-count {
+            float: left;
+
+            width: 40px;
+            height: 13px;
+
+            font-size: 13px;
+            line-height: 13px;
+            text-align: right;
+        }
     }
 }
