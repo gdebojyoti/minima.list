@@ -2,7 +2,7 @@
     "short_name": "Minima.list",
     "name": "An experiment with React, Webpack, Babel, NPM & Sass",
     "display": "standalone",
-    "theme_color": "#27ae60",
+    "theme_color": "#89216B",
     "icons": [{
         "src": "logo-256.png",
         "type": "image/png",
